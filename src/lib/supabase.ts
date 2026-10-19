@@ -468,10 +468,10 @@ export async function sendPasswordResetEmail(
     };
   }
 
+  // Always ensure links sent in recovery emails point to the live public production website
+  // so any client opening the link on their mobile phone or PC can reset their password.
   const targetRedirect = redirectTo || (
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/reset-password`
-      : 'https://swiss-beauty-parlour.vercel.app/reset-password'
+    (import.meta.env.VITE_SITE_URL || 'https://swiss-beauty-parlour.vercel.app').replace(/\/$/, '') + '/reset-password'
   );
 
   try {
