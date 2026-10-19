@@ -69,27 +69,25 @@ export const ForgotPassword: React.FC = () => {
       const { error, isRateLimited } = await sendPasswordReset(trimmedEmail);
       setSubmitting(false);
 
-      if (isRateLimited) {
+      if (isRateLimited || (error && error.message.toLowerCase().includes('rate limit'))) {
         setCooldown(COOLDOWN_SECONDS);
-        setRateLimitNotice(
-          'Email delivery rate limit reached. Please wait 60 seconds before trying again.'
+        setClientError(
+          'Email not sent (Supabase hourly limit reached). Supabase free tier restricts built-in email delivery to 3 emails per hour for this project. To send password reset emails immediately without rate limits, please configure Custom SMTP in your Supabase Dashboard (Project Settings > Authentication > SMTP Settings).'
         );
-        // We still show the neutral confirmation message to prevent user enumeration
-        setSubmittedEmail(trimmedEmail);
-        setIsSuccess(true);
+        setIsSuccess(false);
         return;
       }
 
-      if (error && !error.message.toLowerCase().includes('rate limit')) {
-        // Genuine network/runtime error that does not leak account existence
+      if (error) {
         console.error('Password reset request error:', error);
         setClientError(
-          'We encountered an issue processing your request. Please try again in a few moments.'
+          'We encountered an issue processing your request: ' + error.message
         );
+        setIsSuccess(false);
         return;
       }
 
-      // Successful request: Enforce cooldown and display neutral confirmation
+      // Successful request: Email dispatched by provider
       setCooldown(COOLDOWN_SECONDS);
       setSubmittedEmail(trimmedEmail);
       setIsSuccess(true);
