@@ -266,3 +266,59 @@
     gap: 0.75rem;
   }
 }
+
+@media (max-width: 768px) {
+  .top-strip {
+    padding: 0.35rem 0;
+  }
+
+  .top-strip-inner {
+    justify-content: center;
+  }
+
+  .strip-badge {
+    display: none;
+  }
+
+  .strip-info {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .strip-location, .strip-link {
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .nav-container {
+    height: 4.5rem;
+  }
+
+  .brand-wordmark {
+    font-size: 1.65rem;
+  }
+
+  .brand-sub {
+    font-size: 0.58rem;
+    letter-spacing: 0.24em;
+  }
+}
+
+@media (max-width: 420px) {
+  .strip-location {
+    display: none;
+  }
+
+  .strip-divider {
+    display: none;
+  }
+
+  .strip-link {
+    font-size: 0.75rem;
+  }
+
+  .brand-wordmark {
+    font-size: 1.45rem;
+    letter-spacing: 0.16em;
+  }
+}
