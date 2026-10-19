@@ -1,0 +1,268 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY HEADER STYLES
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 248, 252, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-blush-pink);
+  box-shadow: 0 4px 20px rgba(75, 24, 52, 0.05);
+}
+
+/* Top Announcement Strip: Royal Berry with Soft Gold */
+.top-strip {
+  background-color: var(--color-royal-berry);
+  color: var(--color-pearl-ivory);
+  font-size: 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(215, 177, 109, 0.25);
+}
+
+.top-strip-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.strip-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.strip-location, .strip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-pearl-ivory);
+  font-size: 0.775rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.strip-link:hover {
+  color: var(--color-soft-gold);
+}
+
+.strip-divider {
+  opacity: 0.4;
+  color: var(--color-soft-gold);
+}
+
+.strip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-soft-gold-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.strip-icon {
+  color: var(--color-soft-gold);
+}
+
+/* Main Navigation Bar */
+.main-nav {
+  position: relative;
+  background-color: transparent;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.25rem;
+}
+
+.brand-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand-wordmark {
+  font-family: var(--font-serif-display);
+  font-size: 1.95rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-royal-pink);
+  transition: color var(--transition-fast);
+}
+
+.brand-logo:hover .brand-wordmark {
+  color: var(--color-royal-berry);
+}
+
+.brand-sub {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--color-soft-gold-dark);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-main-text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.45rem 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: var(--color-royal-pink);
+  transition: width var(--transition-smooth);
+}
+
+.nav-link:hover {
+  color: var(--color-royal-pink);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 0.75rem 1.65rem;
+  font-size: 0.775rem;
+  letter-spacing: 0.12em;
+}
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 42px;
+  height: 42px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-burgundy);
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.hamburger-bar::before,
+.hamburger-bar::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-burgundy);
+  transition: all var(--transition-smooth);
+}
+
+.hamburger-bar::before {
+  top: -7px;
+}
+
+.hamburger-bar::after {
+  top: 7px;
+}
+
+.hamburger-bar.open {
+  background-color: transparent;
+}
+
+.hamburger-bar.open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger-bar.open::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-drawer {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-pearl-ivory);
+    border-bottom: 2px solid var(--color-royal-pink);
+    box-shadow: 0 16px 36px rgba(75, 24, 52, 0.16);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-smooth);
+  }
+
+  .mobile-drawer.drawer-open {
+    max-height: 540px;
+  }
+
+  .mobile-drawer-content {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-royal-pink);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-blush-pink);
+  }
+
+  .mobile-drawer-cta {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

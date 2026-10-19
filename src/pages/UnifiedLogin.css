@@ -1,0 +1,233 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — UNIFIED LOGIN INTERFACE ROYAL PINK STYLES
+   ========================================================================== */
+
+.unified-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, rgba(247, 220, 232, 0.4) 0%, var(--color-pearl-ivory) 75%);
+  padding: 2.5rem 1.25rem;
+}
+
+.unified-login-container {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.login-logo-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.unified-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--color-blush-pink-light);
+  border: 1px solid var(--color-soft-gold);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-royal-pink);
+  margin-top: 0.85rem;
+}
+
+.auth-badge-icon {
+  color: var(--color-soft-gold);
+}
+
+.login-card-box {
+  width: 100%;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blush-pink);
+  border-radius: var(--radius-md);
+  padding: 2.5rem 2.5rem;
+  box-shadow: var(--shadow-elevated), var(--shadow-glow-pink);
+}
+
+/* Mode Switch Tabs */
+.auth-mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--color-blush-pink-light);
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  gap: 0.35rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-blush-pink);
+}
+
+.mode-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-main-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mode-tab:hover {
+  color: var(--color-royal-pink);
+}
+
+.mode-tab.active {
+  background-color: var(--color-white);
+  color: var(--color-royal-pink);
+  box-shadow: 0 2px 8px rgba(142, 36, 85, 0.12);
+  border: 1px solid var(--color-soft-gold);
+}
+
+.auth-card-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.auth-card-title {
+  font-family: var(--font-serif-display);
+  font-size: 2.15rem;
+  font-weight: 600;
+  color: var(--color-royal-pink);
+  margin-bottom: 0.4rem;
+}
+
+.auth-card-sub {
+  font-size: 0.9rem;
+  color: var(--color-main-text-muted);
+  line-height: 1.6;
+}
+
+/* Warnings and Alerts */
+.auth-warning-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: #FFF9E6;
+  border: 1px solid #E6CA65;
+  border-radius: var(--radius-sm);
+  padding: 0.95rem 1.15rem;
+  font-size: 0.825rem;
+  color: #7A5C00;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.auth-warning-alert .warn-icon {
+  color: #B38600;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.auth-warning-alert code {
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.auth-error-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #FFF2F4;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  font-size: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.35rem;
+}
+
+.auth-error-alert .error-icon {
+  flex-shrink: 0;
+}
+
+.auth-success-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #F0FAF4;
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.35rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 0.95rem;
+  font-size: 0.925rem;
+  margin-top: 0.65rem;
+}
+
+.auth-helper-note {
+  margin-top: 1.15rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-charcoal-light);
+  line-height: 1.5;
+}
+
+.auth-card-footer {
+  margin-top: 2rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-berry);
+  transition: color var(--transition-fast);
+}
+
+.back-home-link:hover {
+  color: var(--color-berry-dark);
+  text-decoration: underline;
+}
+
+@media (max-width: 540px) {
+  .login-card-box {
+    padding: 2rem 1.35rem;
+  }
+
+  .auth-card-title {
+    font-size: 1.85rem;
+  }
+}

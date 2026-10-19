@@ -1,0 +1,229 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY FOOTER STYLES
+   ========================================================================== */
+
+.site-footer {
+  background: linear-gradient(180deg, var(--color-royal-berry) 0%, var(--color-royal-berry-deep) 100%);
+  color: var(--color-pearl-ivory);
+  padding: 5.5rem 0 2.5rem;
+  border-top: 1px solid var(--color-soft-gold);
+}
+
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.9fr 1.1fr;
+  gap: 3.5rem;
+  padding-bottom: 3.75rem;
+  border-bottom: 1px solid rgba(215, 177, 109, 0.2);
+}
+
+.footer-brand-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.footer-wordmark {
+  font-family: var(--font-serif-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-pearl-ivory);
+}
+
+.footer-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: var(--color-soft-gold);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+.footer-description {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-blush-pink);
+  margin-bottom: 1.75rem;
+}
+
+.footer-phone-cta {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-phone-label {
+  font-family: var(--font-sans);
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-soft-gold);
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.footer-phone-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-pearl-ivory);
+  transition: color var(--transition-fast);
+}
+
+.footer-phone-val:hover {
+  color: var(--color-soft-gold-light);
+}
+
+.f-icon {
+  color: var(--color-soft-gold);
+}
+
+.footer-heading {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--color-pearl-ivory);
+  margin-bottom: 1.35rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-blush-pink);
+  transition: all var(--transition-fast);
+  letter-spacing: 0.02em;
+}
+
+.footer-links a:hover {
+  color: var(--color-soft-gold);
+  transform: translateX(3px);
+}
+
+.footer-loc-info {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.f-icon-loc {
+  color: var(--color-soft-gold);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.footer-address-text {
+  font-size: 0.875rem;
+  color: var(--color-blush-pink);
+  line-height: 1.6;
+}
+
+.footer-book-btn {
+  width: 100%;
+  background-color: var(--color-royal-pink);
+  color: var(--color-pearl-ivory);
+  border: 1px solid var(--color-soft-gold);
+  font-size: 0.775rem;
+  letter-spacing: 0.12em;
+  box-shadow: var(--shadow-royal-pink);
+}
+
+.footer-book-btn:hover {
+  background-color: var(--color-royal-pink-hover);
+  color: var(--color-pearl-ivory);
+  border-color: var(--color-soft-gold-light);
+}
+
+/* Bottom Bar */
+.footer-bottom-bar {
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--color-blush-pink);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright-text {
+  color: rgba(255, 248, 252, 0.75);
+  font-size: 0.8125rem;
+}
+
+.footer-bottom-middle {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 248, 252, 0.85);
+  font-size: 0.8125rem;
+}
+
+.footer-owner-link {
+  color: var(--color-soft-gold-light);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-owner-link:hover {
+  color: var(--color-pearl-ivory);
+}
+
+.scroll-top-btn {
+  background-color: rgba(255, 248, 252, 0.08);
+  border: 1px solid rgba(215, 177, 109, 0.25);
+  color: var(--color-pearl-ivory);
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.scroll-top-btn:hover {
+  background-color: var(--color-soft-gold);
+  color: var(--color-royal-berry);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .footer-main-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-main-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

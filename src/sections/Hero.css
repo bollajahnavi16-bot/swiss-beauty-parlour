@@ -1,0 +1,480 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ASYMMETRIC ROYAL PINK LUXURY HERO STYLES
+   ========================================================================== */
+
+.editorial-hero-section {
+  position: relative;
+  background-color: var(--color-pearl-ivory);
+  padding: 2.25rem 0 3.25rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-blush-pink);
+}
+
+.hero-container {
+  width: 100%;
+}
+
+/* Asymmetric CSS Grid Layout */
+.hero-asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.18fr;
+  grid-template-rows: minmax(470px, auto) 290px;
+  gap: 1.25rem;
+}
+
+/* 1. Large Brand Panel */
+.hero-brand-panel {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  background-color: var(--color-white);
+  color: var(--color-main-text);
+  padding: 3.5rem 3.5rem 2.75rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-blush-pink);
+  box-shadow: var(--shadow-editorial);
+  position: relative;
+}
+
+.hero-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.brand-monogram-lockup {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-wordmark-title {
+  font-family: var(--font-serif-display);
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--color-royal-pink);
+  line-height: 1;
+}
+
+.brand-wordmark-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--color-soft-gold-dark);
+  margin-top: 0.35rem;
+  text-transform: uppercase;
+}
+
+.hero-atelier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-royal-pink);
+  background-color: var(--color-blush-pink-light);
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-soft-gold);
+}
+
+.atelier-icon {
+  color: var(--color-soft-gold);
+}
+
+.hero-brand-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0 2rem 0;
+}
+
+.hero-eyebrow-text {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-luxury-rose);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4.4vw, 4.5rem);
+  font-weight: 400;
+  color: var(--color-royal-pink);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.headline-emphasis {
+  font-family: var(--font-serif-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-royal-berry);
+  letter-spacing: -0.015em;
+}
+
+.hero-subtext {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.68;
+  color: var(--color-charcoal-muted);
+  max-width: 540px;
+  margin-bottom: 2.25rem;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-primary-btn {
+  background-color: var(--color-royal-pink);
+  color: var(--color-pearl-ivory);
+  border: 1px solid var(--color-royal-pink);
+  padding: 1.05rem 2.4rem;
+  letter-spacing: 0.14em;
+  box-shadow: var(--shadow-royal-pink);
+}
+
+.hero-primary-btn:hover {
+  background-color: var(--color-royal-pink-hover);
+  border-color: var(--color-soft-gold);
+  box-shadow: 0 12px 32px -4px rgba(142, 36, 85, 0.45);
+}
+
+.hero-secondary-link {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-royal-pink);
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.link-hover-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-royal-pink);
+  transition: transform var(--transition-smooth), background-color var(--transition-fast);
+  transform-origin: left;
+}
+
+.hero-secondary-link:hover {
+  color: var(--color-royal-berry);
+}
+
+.hero-secondary-link:hover .link-hover-line {
+  background-color: var(--color-soft-gold-dark);
+  transform: scaleX(1.08);
+}
+
+.hero-brand-footer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+}
+
+.brand-footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.meta-caption {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-charcoal-light);
+  text-transform: uppercase;
+}
+
+.meta-text {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+
+.brand-footer-separator {
+  width: 1px;
+  height: 28px;
+  background-color: var(--color-border-strong);
+}
+
+/* 2. Large Vertical Beauty Portrait Panel */
+.hero-vertical-panel {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-blush-pink);
+  box-shadow: var(--shadow-editorial);
+  min-height: 100%;
+}
+
+.vertical-image-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-near-black-soft);
+}
+
+.vertical-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform var(--transition-slow);
+}
+
+.vertical-image-box:hover .vertical-hero-img {
+  transform: scale(1.04);
+}
+
+/* 3 & 4. Supporting Lower Left Panels */
+.hero-support-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-blush-pink);
+  box-shadow: var(--shadow-editorial);
+  height: 100%;
+}
+
+.support-panel-one {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.support-panel-two {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.support-image-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-near-black-soft);
+}
+
+.support-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.support-image-box:hover .support-hero-img {
+  transform: scale(1.04);
+}
+
+/* Image Vignette Overlay */
+.image-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 24, 52, 0.2) 0%,
+    rgba(75, 24, 52, 0.05) 50%,
+    rgba(75, 24, 52, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+/* Minimal Floating Editorial Labels */
+.floating-editorial-label {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(75, 24, 52, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(215, 177, 109, 0.4);
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.label-code {
+  font-family: var(--font-serif-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-soft-gold);
+  letter-spacing: 0.08em;
+}
+
+.label-title {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-pearl-ivory);
+}
+
+.label-top-right {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.label-bottom-left {
+  bottom: 1.25rem;
+  left: 1.25rem;
+}
+
+.floating-editorial-caption {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 1.75rem;
+  right: 1.75rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.caption-tag {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-soft-gold);
+}
+
+.caption-text {
+  font-family: var(--font-serif-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-pearl-ivory);
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE BREAKPOINTS)
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .hero-asymmetric-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 260px;
+    gap: 1rem;
+  }
+
+  .hero-brand-panel {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding: 2.75rem 2.25rem;
+  }
+
+  .hero-vertical-panel {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    height: 480px;
+  }
+
+  .support-panel-one {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .support-panel-two {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .editorial-hero-section {
+    padding: 1.25rem 0 2rem;
+  }
+
+  .hero-asymmetric-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero-brand-panel {
+    padding: 2.25rem 1.5rem 1.75rem 1.5rem;
+  }
+
+  .hero-headline {
+    font-size: 2.35rem;
+  }
+
+  .hero-subtext {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .hero-primary-btn {
+    width: 100%;
+  }
+
+  .hero-secondary-link {
+    align-items: center;
+  }
+
+  .hero-brand-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .brand-footer-separator {
+    display: none;
+  }
+
+  .hero-vertical-panel {
+    height: 420px;
+  }
+
+  .hero-support-panel {
+    height: 240px;
+  }
+}

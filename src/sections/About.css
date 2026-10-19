@@ -1,0 +1,204 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY ABOUT STYLES
+   ========================================================================== */
+
+.about-section {
+  background-color: var(--color-blush-pink-light);
+  border-bottom: 1px solid var(--color-blush-pink);
+  position: relative;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.about-visual-column {
+  position: relative;
+}
+
+.about-visual-frame-wrapper {
+  position: relative;
+}
+
+.about-frame-accent-border {
+  position: absolute;
+  inset: -14px 14px 14px -14px;
+  border: 1px solid var(--color-soft-gold);
+  border-radius: var(--radius-xs);
+  pointer-events: none;
+  z-index: 0;
+  background-color: rgba(215, 177, 109, 0.05);
+}
+
+.about-image-wrapper {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--color-blush-pink);
+  background-color: var(--color-royal-berry-deep);
+}
+
+.about-primary-image {
+  width: 100%;
+  height: 580px;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.about-image-wrapper:hover .about-primary-image {
+  transform: scale(1.03);
+}
+
+.about-badge-card {
+  position: absolute;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  left: 1.75rem;
+  background-color: rgba(75, 24, 52, 0.94);
+  color: var(--color-pearl-ivory);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 3px solid var(--color-soft-gold);
+  border-top: 1px solid rgba(255, 248, 252, 0.12);
+  border-right: 1px solid rgba(255, 248, 252, 0.12);
+  border-bottom: 1px solid rgba(255, 248, 252, 0.12);
+  box-shadow: var(--shadow-royal-berry);
+}
+
+.about-heart-icon {
+  color: var(--color-soft-gold);
+  flex-shrink: 0;
+}
+
+.about-badge-text {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--color-pearl-ivory);
+}
+
+/* Right Content Column */
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.2vw, 3.25rem);
+  color: var(--color-royal-pink);
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+
+.about-lead {
+  font-family: var(--font-serif-display);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--color-royal-berry);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.about-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-main-text-muted);
+  margin-bottom: 2.25rem;
+}
+
+/* Values List */
+.about-values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.value-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-blush-pink);
+}
+
+.value-icon {
+  color: var(--color-soft-gold-dark);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.value-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-royal-pink);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.value-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-main-text-muted);
+}
+
+/* Address Banner */
+.about-location-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.4rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-soft-gold);
+  border-radius: var(--radius-xs);
+  font-size: 0.85rem;
+  color: var(--color-main-text);
+  font-weight: 600;
+  box-shadow: var(--shadow-editorial);
+}
+
+.loc-icon {
+  color: var(--color-royal-pink);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .about-primary-image {
+    height: 440px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-primary-image {
+    height: 340px;
+  }
+
+  .about-badge-card {
+    position: static;
+    margin-top: 1rem;
+    border-radius: var(--radius-xs);
+  }
+
+  .about-frame-accent-border {
+    display: none;
+  }
+}

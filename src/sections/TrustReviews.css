@@ -1,0 +1,157 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY TRUST & REVIEWS STYLES
+   ========================================================================== */
+
+.trust-section {
+  background-color: var(--color-pearl-ivory-warm);
+  border-bottom: 1px solid var(--color-blush-pink);
+}
+
+.trust-card {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blush-pink);
+  border-radius: var(--radius-xs);
+  padding: 4rem 3.5rem;
+  gap: 4rem;
+  box-shadow: var(--shadow-editorial);
+}
+
+.trust-rating-col {
+  display: flex;
+  justify-content: center;
+  border-right: 1px solid var(--color-blush-pink);
+  padding-right: 3rem;
+}
+
+.rating-number-badge {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating-big {
+  font-family: var(--font-serif-display);
+  font-size: 5.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-royal-pink);
+  margin-bottom: 0.5rem;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.35rem;
+  color: var(--color-soft-gold);
+  margin-bottom: 0.85rem;
+}
+
+.star-empty {
+  color: rgba(215, 177, 109, 0.35);
+}
+
+.rating-count-label {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-main-text-muted);
+  font-weight: 500;
+}
+
+.trust-info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trust-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--color-royal-pink);
+  background-color: var(--color-blush-pink-light);
+  border: 1px solid var(--color-soft-gold);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1rem;
+}
+
+.badge-icon {
+  color: var(--color-soft-gold-dark);
+}
+
+.trust-title {
+  font-family: var(--font-serif);
+  font-size: 2.15rem;
+  color: var(--color-royal-pink);
+  margin-bottom: 0.85rem;
+  line-height: 1.2;
+}
+
+.trust-desc {
+  font-size: 1rem;
+  color: var(--color-main-text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.trust-verification-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--color-main-text-light);
+  margin-bottom: 1.75rem;
+  background-color: var(--color-blush-pink-light);
+  border-left: 2px solid var(--color-soft-gold);
+  padding: 0.95rem 1.25rem;
+  border-radius: var(--radius-xs);
+  line-height: 1.6;
+}
+
+.verify-icon {
+  color: var(--color-soft-gold-dark);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.btn-review-link {
+  font-size: 0.775rem;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   RESPONSIVE (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .trust-card {
+    grid-template-columns: 1fr;
+    padding: 3rem 2rem;
+    gap: 2.5rem;
+  }
+
+  .trust-rating-col {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-right: 0;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .trust-card {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .trust-title {
+    font-size: 1.75rem;
+  }
+}

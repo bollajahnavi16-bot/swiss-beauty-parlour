@@ -1,0 +1,214 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY CONTACT & LOCATION STYLES
+   ========================================================================== */
+
+.contact-section {
+  background-color: var(--color-pearl-ivory);
+  border-bottom: 1px solid var(--color-blush-pink);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.contact-info-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blush-pink);
+  border-radius: var(--radius-xs);
+  padding: 3.5rem 3rem;
+  box-shadow: var(--shadow-editorial);
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-royal-pink);
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-blush-pink);
+  line-height: 1.2;
+}
+
+.contact-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+}
+
+.contact-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.detail-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-blush-pink-light);
+  border: 1px solid var(--color-soft-gold);
+  color: var(--color-royal-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  font-family: var(--font-sans);
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-soft-gold-dark);
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.detail-text {
+  font-size: 1rem;
+  color: var(--color-main-text);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.detail-subtext {
+  font-size: 0.8rem;
+  color: var(--color-main-text-light);
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.contact-link {
+  color: var(--color-royal-pink);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.contact-link:hover {
+  color: var(--color-royal-berry);
+  text-decoration: underline;
+}
+
+.contact-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-blush-pink);
+}
+
+.btn-contact-action {
+  flex: 1;
+  min-width: 170px;
+  padding: 0.85rem 1.4rem;
+  font-size: 0.775rem;
+  letter-spacing: 0.12em;
+}
+
+/* Map Card */
+.contact-map-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blush-pink);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  box-shadow: var(--shadow-editorial);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header-bar {
+  padding: 1.5rem 2rem;
+  background-color: var(--color-blush-pink-light);
+  border-bottom: 1px solid var(--color-blush-pink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-header-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-royal-pink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.map-title-icon {
+  color: var(--color-soft-gold-dark);
+}
+
+.map-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-royal-pink);
+}
+
+.map-external-link:hover {
+  color: var(--color-royal-berry);
+  text-decoration: underline;
+}
+
+.map-iframe-container {
+  flex-grow: 1;
+  min-height: 380px;
+  position: relative;
+  background-color: #EDEAE7;
+}
+
+.map-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE (TABLET & MOBILE)
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-info-card {
+    padding: 2.75rem 2rem;
+  }
+
+  .map-iframe-container {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-info-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-contact-action {
+    width: 100%;
+  }
+}

@@ -1,0 +1,410 @@
+/* ==========================================================================
+   SWISS BEAUTY PARLOUR — ROYAL PINK LUXURY EDITORIAL DESIGN SYSTEM
+   
+   Royal Pink Luxury Palette:
+   - Royal Pink:   #8E2455 (Primary buttons, key accents, focus rings)
+   - Luxury Rose:  #D94F91 (Secondary accents, category tags, interactive highlights)
+   - Blush Pink:   #F7DCE8 (Pale blush backgrounds, pills, delicate dividers)
+   - Pearl Ivory:  #FFF8FC (Spacious luxury backgrounds, card surfaces, clean contrast)
+   - Royal Berry:  #4B1834 (Deep framing, premium concierge desk, footer, announcement)
+   - Soft Gold:    #D7B16D (Restrained decorative rules, stars, monogram details, icons)
+   - Main text:    #382331 (High-contrast editorial readability)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* Core Royal Pink Luxury Palette */
+  --color-royal-pink: #8E2455;
+  --color-royal-pink-hover: #751B44;
+  --color-royal-pink-deep: #5E1537;
+  --color-royal-pink-tint: #FAEEF3;
+  --color-royal-pink-muted: rgba(142, 36, 85, 0.7);
+
+  --color-luxury-rose: #D94F91;
+  --color-luxury-rose-light: #FCEEF5;
+  --color-luxury-rose-hover: #C33B7C;
+  --color-luxury-rose-dark: #B3326F;
+
+  --color-blush-pink: #F7DCE8;
+  --color-blush-pink-light: #FDF4F8;
+  --color-blush-pink-dark: #E6BCCC;
+
+  --color-pearl-ivory: #FFF8FC;
+  --color-pearl-ivory-warm: #FAF1F6;
+  --color-pearl-ivory-tint: #F7E7EF;
+
+  --color-royal-berry: #4B1834;
+  --color-royal-berry-deep: #3A1228;
+  --color-royal-berry-hover: #330E22;
+  --color-royal-berry-card: #3D142A;
+
+  --color-soft-gold: #D7B16D;
+  --color-soft-gold-light: #F6ECD7;
+  --color-soft-gold-dark: #B58F48;
+  --color-soft-gold-muted: rgba(215, 177, 109, 0.45);
+
+  --color-main-text: #382331;
+  --color-main-text-muted: #5C4153;
+  --color-main-text-light: #7E6074;
+  --color-main-text-soft: #9E8194;
+
+  /* Aliases for backwards compatibility & seamless transitions */
+  --color-burgundy: #8E2455;
+  --color-burgundy-deep: #751B44;
+  --color-burgundy-hover: #5E1537;
+  --color-burgundy-tint: #FAEEF3;
+  --color-burgundy-muted: rgba(142, 36, 85, 0.7);
+
+  --color-near-black: #4B1834;
+  --color-near-black-soft: #3A1228;
+  --color-near-black-card: #3D142A;
+
+  --color-ivory: #FFF8FC;
+  --color-ivory-warm: #FAF1F6;
+  --color-ivory-tint: #F7E7EF;
+
+  --color-dusty-rose: #D94F91;
+  --color-dusty-rose-light: #F7DCE8;
+  --color-dusty-rose-dark: #B3326F;
+
+  --color-rose-gold: #D7B16D;
+  --color-rose-gold-light: #F6ECD7;
+  --color-rose-gold-dark: #B58F48;
+  --color-rose-gold-muted: rgba(215, 177, 109, 0.45);
+
+  /* Background Canvases */
+  --color-canvas: #FFF8FC;
+  --color-canvas-card: #FFFFFF;
+  --color-canvas-alt: #FAF1F6;
+  --color-canvas-subtle: #F7DCE8;
+  --color-canvas-dark: #4B1834;
+  --color-canvas-burgundy: #8E2455;
+
+  /* System Roles */
+  --color-primary: #8E2455;
+  --color-primary-hover: #751B44;
+  --color-accent: #D7B16D;
+  --color-berry: #4B1834;
+  --color-berry-dark: #3A1228;
+  --color-berry-hover: #330E22;
+  --color-blush: #F7DCE8;
+  --color-blush-soft: #FDF4F8;
+
+  /* Text & Readability */
+  --color-charcoal: #382331;
+  --color-charcoal-muted: #5C4153;
+  --color-charcoal-light: #7E6074;
+  --color-charcoal-soft: #9E8194;
+  --color-white: #FFFFFF;
+
+  /* Borders & Dividers */
+  --color-border: rgba(142, 36, 85, 0.12);
+  --color-border-strong: rgba(142, 36, 85, 0.25);
+  --color-border-rosegold: rgba(215, 177, 109, 0.5);
+  --color-border-gold: rgba(215, 177, 109, 0.6);
+  --color-border-dark: rgba(255, 248, 252, 0.16);
+
+  /* Status */
+  --color-error: #B92842;
+  --color-success: #2E7D52;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-editorial: 0 16px 40px -10px rgba(56, 35, 49, 0.08);
+  --shadow-elevated: 0 24px 60px -12px rgba(56, 35, 49, 0.14);
+  --shadow-royal-pink: 0 10px 30px -4px rgba(142, 36, 85, 0.32);
+  --shadow-royal-berry: 0 18px 48px -8px rgba(75, 24, 52, 0.35);
+  --shadow-burgundy: 0 10px 30px -4px rgba(142, 36, 85, 0.32);
+  --shadow-glow-gold: 0 8px 24px -4px rgba(215, 177, 109, 0.4);
+  --shadow-glow-pink: 0 8px 28px -4px rgba(217, 79, 145, 0.25);
+
+  /* Radii (Refined, architectural with subtle softness) */
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-pearl-ivory);
+  color: var(--color-main-text);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+  min-width: 320px;
+  width: 100%;
+}
+
+#root, .app-root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+#main-content {
+  width: 100%;
+  flex-grow: 1;
+}
+
+::selection {
+  background-color: var(--color-royal-pink);
+  color: var(--color-pearl-ivory);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-burgundy);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--color-charcoal-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 3px;
+}
+
+/* Fluid Unified Page Container */
+.container {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 3.5vw, 2.5rem);
+  padding-right: clamp(1.25rem, 3.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+/* Editorial Dividers & Accents */
+.gold-rule {
+  height: 1px;
+  width: 56px;
+  background: linear-gradient(to right, transparent, var(--color-rose-gold), transparent);
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.gold-rule.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-burgundy);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-dusty-rose-light);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-rosegold);
+  margin-bottom: 1.25rem;
+}
+
+/* Editorial Button System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.2rem;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-smooth);
+  text-align: center;
+  position: relative;
+}
+
+/* Primary Button: Royal Pink (#8E2455) */
+.btn-primary {
+  background-color: var(--color-royal-pink);
+  color: var(--color-pearl-ivory);
+  border-color: var(--color-royal-pink);
+  box-shadow: var(--shadow-royal-pink);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-royal-pink-hover);
+  border-color: var(--color-soft-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px rgba(142, 36, 85, 0.45);
+}
+
+/* Secondary Button: Pearl Ivory with Royal Pink Border & Text */
+.btn-secondary {
+  background-color: var(--color-pearl-ivory);
+  color: var(--color-royal-pink);
+  border: 1px solid var(--color-royal-pink);
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-royal-pink);
+  color: var(--color-pearl-ivory);
+  border-color: var(--color-royal-pink);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-royal-pink);
+}
+
+/* Royal Berry Section Button */
+.btn-dark {
+  background-color: var(--color-royal-berry);
+  color: var(--color-pearl-ivory);
+  border: 1px solid rgba(215, 177, 109, 0.4);
+}
+
+.btn-dark:hover {
+  background-color: var(--color-royal-pink);
+  border-color: var(--color-soft-gold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-royal-pink);
+}
+
+/* WhatsApp Button */
+.btn-whatsapp {
+  background-color: #25D366;
+  color: var(--color-white);
+  border-color: #25D366;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1EBE5D;
+  border-color: #1EBE5D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(37, 211, 102, 0.35);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-royal-pink);
+  padding: 0.5rem 1rem;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-blush-pink-light);
+  color: var(--color-royal-pink-hover);
+}
+
+/* Section Spacing */
+.section {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+}
+
+/* Editorial Section Header */
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--color-burgundy);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-charcoal-muted);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-dusty-rose-light);
+  color: var(--color-burgundy);
+  border: 1px solid var(--color-border-rosegold);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
