@@ -457,6 +457,15 @@ export async function upsertCustomerProfile(
  * Send password reset email via Supabase Auth.
  * Detects rate limit errors and enforces secure handling.
  */
+export const PRODUCTION_RESET_URL = "https://swiss-beauty-parlour.vercel.app/reset-password";
+
+export function getPasswordResetRedirectUrl(): string {
+  // Always ensure links sent in recovery emails point to the live public production website
+  // so any client opening the link on their mobile phone or PC can reset their password.
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://swiss-beauty-parlour.vercel.app';
+  return `${siteUrl.replace(/\/$/, '')}/reset-password`;
+}
+
 export async function sendPasswordResetEmail(
   email: string,
   redirectTo?: string
@@ -468,11 +477,7 @@ export async function sendPasswordResetEmail(
     };
   }
 
-  // Always ensure links sent in recovery emails point to the live public production website
-  // so any client opening the link on their mobile phone or PC can reset their password.
-  const targetRedirect = redirectTo || (
-    (import.meta.env.VITE_SITE_URL || 'https://swiss-beauty-parlour.vercel.app').replace(/\/$/, '') + '/reset-password'
-  );
+  const targetRedirect = redirectTo || getPasswordResetRedirectUrl();
 
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {

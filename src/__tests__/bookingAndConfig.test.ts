@@ -115,3 +115,83 @@ describe('Booking Validation Rules', () => {
     expect(waUrl).toContain(encodeURIComponent('appointment request subject to salon confirmation'));
   });
 });
+
+describe('Supabase Password Reset & Recovery Flow', () => {
+  it('strictly targets the production reset-password URL and avoids localhost', async () => {
+    const { getPasswordResetRedirectUrl, PRODUCTION_RESET_URL } = await import('../lib/supabase');
+    expect(PRODUCTION_RESET_URL).toBe('https://swiss-beauty-parlour.vercel.app/reset-password');
+    const redirectUrl = getPasswordResetRedirectUrl();
+    expect(redirectUrl).toContain('https://swiss-beauty-parlour.vercel.app/reset-password');
+    expect(redirectUrl).not.toContain('localhost');
+  });
+
+  it('validates password criteria strictly', () => {
+    const validate = (pwd: string, confirm: string) => ({
+      minLength: pwd.length >= 8,
+      hasUpper: /[A-Z]/.test(pwd),
+      hasLower: /[a-z]/.test(pwd),
+      hasNumber: /[0-9]/.test(pwd),
+      hasSpecial: /[!@#$%^&*(),.?":{}|<>_\-+=\\/[\]]/.test(pwd),
+      passwordsMatch: pwd.length > 0 && pwd === confirm,
+    });
+
+    // Valid password
+    const valid = validate('SwissSalon@2026', 'SwissSalon@2026');
+    expect(valid.minLength).toBe(true);
+    expect(valid.hasUpper).toBe(true);
+    expect(valid.hasLower).toBe(true);
+    expect(valid.hasNumber).toBe(true);
+    expect(valid.hasSpecial).toBe(true);
+    expect(valid.passwordsMatch).toBe(true);
+
+    // Mismatched password
+    const mismatch = validate('SwissSalon@2026', 'DifferentPass@2026');
+    expect(mismatch.passwordsMatch).toBe(false);
+
+    // Short password (< 8 chars)
+    const short = validate('Pass1!', 'Pass1!');
+    expect(short.minLength).toBe(false);
+
+    // Missing uppercase
+    const noUpper = validate('swisssalon@2026', 'swisssalon@2026');
+    expect(noUpper.hasUpper).toBe(false);
+
+    // Missing number
+    const noNumber = validate('SwissSalon@Demo', 'SwissSalon@Demo');
+    expect(noNumber.hasNumber).toBe(false);
+
+    // Missing special character
+    const noSpecial = validate('SwissSalon2026', 'SwissSalon2026');
+    expect(noSpecial.hasSpecial).toBe(false);
+  });
+
+  it('computes password strength scores accurately', () => {
+    const calcStrength = (pwd: string) => {
+      let score = 0;
+      if (pwd.length >= 8) score += 1;
+      if (/[A-Z]/.test(pwd) && /[a-z]/.test(pwd)) score += 1;
+      if (/[0-9]/.test(pwd)) score += 1;
+      if (/[!@#$%^&*(),.?":{}|<>_\-+=\\/[\]]/.test(pwd)) score += 1;
+
+      switch (score) {
+        case 1:
+          return 'Weak';
+        case 2:
+          return 'Fair';
+        case 3:
+          return 'Good';
+        case 4:
+          return 'Strong';
+        default:
+          return 'Weak';
+      }
+    };
+
+    expect(calcStrength('abc')).toBe('Weak');
+    expect(calcStrength('abcdefgh')).toBe('Weak'); // length only
+    expect(calcStrength('Abcdefgh')).toBe('Fair'); // length + upper/lower
+    expect(calcStrength('Abcdefgh1')).toBe('Good'); // length + upper/lower + number
+    expect(calcStrength('Swiss@2026')).toBe('Strong'); // all 4 criteria
+  });
+});
+

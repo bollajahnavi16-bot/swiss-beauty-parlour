@@ -43,8 +43,11 @@ export const ResetPassword: React.FC = () => {
     const hashParams = new URLSearchParams(hash.startsWith('#') ? hash.slice(1) : hash);
     const searchParams = new URLSearchParams(search);
 
-    const errorParam = hashParams.get('error_description') || searchParams.get('error_description') ||
-      hashParams.get('error') || searchParams.get('error');
+    const errorParam =
+      hashParams.get('error_description') ||
+      searchParams.get('error_description') ||
+      hashParams.get('error') ||
+      searchParams.get('error');
 
     const typeParam = hashParams.get('type') || searchParams.get('type');
     const accessToken = hashParams.get('access_token');
@@ -65,7 +68,7 @@ export const ResetPassword: React.FC = () => {
       if (!isSupabaseConfigured()) {
         if (isMounted) {
           setTokenStatus('invalid');
-          setErrorMessage('Authentication provider is not configured.');
+          setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
         }
         return;
       }
@@ -74,45 +77,49 @@ export const ResetPassword: React.FC = () => {
       if (hashError) {
         if (isMounted) {
           setTokenStatus('invalid');
-          setErrorMessage(
-            hashError.toLowerCase().includes('expired')
-              ? 'This password reset link has expired. Reset links are valid for a limited time.'
-              : hashError
-          );
+          setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
         }
         return;
       }
 
-      // Listen for PASSWORD_RECOVERY event or check existing session
-      try {
-        // First check if there's an exchangeable code in the query params
-        const searchParams = new URLSearchParams(window.location.search);
-        const code = searchParams.get('code');
-        if (code) {
+      // Check if there is an authorization code in query params (PKCE flow)
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get('code');
+      if (code) {
+        try {
           const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
           if (exchangeError) {
             console.error('Code exchange failed:', exchangeError);
             if (isMounted) {
               setTokenStatus('invalid');
-              setErrorMessage('The recovery link is invalid or has already been used.');
+              setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
             }
             return;
           }
+        } catch (err) {
+          console.error('Code exchange exception:', err);
+          if (isMounted) {
+            setTokenStatus('invalid');
+            setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
+          }
+          return;
         }
+      }
 
-        // Get current active session
+      // Check active session established by Supabase client
+      try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
         if (sessionError) {
           console.error('Session retrieval error:', sessionError);
           if (isMounted) {
             setTokenStatus('invalid');
-            setErrorMessage('Unable to verify your reset token. Please request a new link.');
+            setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
           }
           return;
         }
 
-        // Check if session is present and we arrived via recovery context
+        // Valid session exists under recovery context
         if (session && (isExplicitRecovery || session.user)) {
           if (isMounted) {
             setTokenStatus('valid');
@@ -121,38 +128,36 @@ export const ResetPassword: React.FC = () => {
           return;
         }
 
-        // If no session and no recovery tokens were in URL, link is invalid or missing
+        // Direct navigation without recovery token or session
         if (!hasRecoveryTokens && !session) {
           if (isMounted) {
             setTokenStatus('invalid');
-            setErrorMessage(
-              'No active password recovery request found. Please request a password reset link from the login page.'
-            );
+            setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
           }
           return;
         }
 
-        // Fallback: wait briefly for supabase auth state event
+        // Fallback wait for onAuthStateChange to fire if tokens are being processed asynchronously
         const timeout = setTimeout(() => {
           if (isMounted && tokenStatus === 'verifying') {
             setTokenStatus('invalid');
-            setErrorMessage('The password reset link is invalid, expired, or has already been used.');
+            setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
           }
-        }, 3000);
+        }, 2000);
 
         return () => clearTimeout(timeout);
       } catch (err) {
         console.error('Token verification exception:', err);
         if (isMounted) {
           setTokenStatus('invalid');
-          setErrorMessage('Failed to validate password reset link. Please try again.');
+          setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
         }
       }
     }
 
     checkRecoverySession();
 
-    // Listen for auth state change specifically for PASSWORD_RECOVERY
+    // Listen for auth state change specifically for PASSWORD_RECOVERY or SIGNED_IN
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (!isMounted) return;
       if (event === 'PASSWORD_RECOVERY' || (event === 'SIGNED_IN' && session)) {
@@ -167,7 +172,7 @@ export const ResetPassword: React.FC = () => {
     };
   }, [hashError, hasRecoveryTokens, isExplicitRecovery, tokenStatus]);
 
-  // Validation rules checklist
+  // Validation rules criteria
   const criteria = useMemo(() => {
     return {
       minLength: password.length >= 8,
@@ -178,6 +183,29 @@ export const ResetPassword: React.FC = () => {
       passwordsMatch: password.length > 0 && password === confirmPassword,
     };
   }, [password, confirmPassword]);
+
+  // Password strength score calculation (0 to 4)
+  const strength = useMemo(() => {
+    if (!password) return { score: 0, label: 'None', color: 'none', percent: 0 };
+    let score = 0;
+    if (criteria.minLength) score += 1;
+    if (criteria.hasUpper && criteria.hasLower) score += 1;
+    if (criteria.hasNumber) score += 1;
+    if (criteria.hasSpecial) score += 1;
+
+    switch (score) {
+      case 1:
+        return { score: 1, label: 'Weak', color: 'weak', percent: 25 };
+      case 2:
+        return { score: 2, label: 'Fair', color: 'fair', percent: 50 };
+      case 3:
+        return { score: 3, label: 'Good', color: 'good', percent: 75 };
+      case 4:
+        return { score: 4, label: 'Strong', color: 'strong', percent: 100 };
+      default:
+        return { score: 0, label: 'Weak', color: 'weak', percent: 15 };
+    }
+  }, [password, criteria]);
 
   const isFormValid =
     criteria.minLength &&
@@ -210,12 +238,11 @@ export const ResetPassword: React.FC = () => {
         if (
           errorMsg.toLowerCase().includes('expired') ||
           errorMsg.toLowerCase().includes('jwt') ||
-          errorMsg.toLowerCase().includes('not authorized')
+          errorMsg.toLowerCase().includes('not authorized') ||
+          errorMsg.toLowerCase().includes('session')
         ) {
           setTokenStatus('invalid');
-          setErrorMessage(
-            'Your reset session has expired. Please request a new password reset link.'
-          );
+          setErrorMessage('Your password reset link is invalid or has expired. Please request a new one.');
           return;
         }
 
@@ -223,16 +250,18 @@ export const ResetPassword: React.FC = () => {
         return;
       }
 
-      // Password successfully updated!
+      // Success: Clear sensitive fields immediately
+      setPassword('');
+      setConfirmPassword('');
       setTokenStatus('success');
 
-      // Invalidate recovery session and sign user out
-      await signOut();
-
-      // Clear any tokens from URL for clean browser state
+      // Clear tokens from URL for clean browser state
       if (window.history?.replaceState) {
         window.history.replaceState(null, document.title, window.location.pathname);
       }
+
+      // Sign out of the temporary recovery session
+      await signOut();
     } catch (err) {
       setIsSubmitting(false);
       console.error('Unexpected reset error:', err);
@@ -273,8 +302,8 @@ export const ResetPassword: React.FC = () => {
             <span className="brand-sub">BEAUTY PARLOUR</span>
           </Link>
           <div className="reset-auth-badge">
-            <Sparkles size={12} className="auth-badge-icon" />
-            <span>Secure Password Reset</span>
+            <Sparkles size={12} className="auth-badge-icon" aria-hidden="true" />
+            <span>Secure Password Recovery</span>
           </div>
         </div>
 
@@ -284,7 +313,7 @@ export const ResetPassword: React.FC = () => {
           {tokenStatus === 'verifying' && (
             <div className="reset-state-center">
               <div className="reset-loading-spinner-wrap">
-                <RefreshCw size={36} className="btn-spinner reset-spinner" />
+                <RefreshCw size={36} className="btn-spinner reset-spinner" aria-hidden="true" />
               </div>
               <h1 className="reset-card-title">Verifying Reset Link</h1>
               <p className="reset-card-sub">
@@ -297,12 +326,11 @@ export const ResetPassword: React.FC = () => {
           {tokenStatus === 'invalid' && (
             <div className="reset-state-center">
               <div className="reset-invalid-icon-wrap">
-                <ShieldAlert size={36} className="reset-invalid-icon" />
+                <ShieldAlert size={36} className="reset-invalid-icon" aria-hidden="true" />
               </div>
               <h1 className="reset-card-title">Link Invalid or Expired</h1>
               <p className="reset-card-sub reset-error-explanation">
-                {errorMessage ||
-                  'This password reset link is invalid, has expired, or has already been used. Password reset links are time-limited and single-use for your security.'}
+                {errorMessage || 'Your password reset link is invalid or has expired. Please request a new one.'}
               </p>
 
               <div className="reset-action-buttons">
@@ -311,8 +339,8 @@ export const ResetPassword: React.FC = () => {
                   className="btn btn-primary reset-request-new-btn"
                   id="request-new-link-btn"
                 >
-                  <KeyRound size={16} />
-                  <span>Request a New Reset Link</span>
+                  <KeyRound size={16} aria-hidden="true" />
+                  <span>Request New Reset Link</span>
                 </Link>
 
                 <Link to="/login" className="back-login-link">
@@ -327,18 +355,18 @@ export const ResetPassword: React.FC = () => {
             <>
               <div className="reset-card-header">
                 <div className="reset-header-icon-wrap">
-                  <Lock size={26} className="reset-header-icon" />
+                  <Lock size={26} className="reset-header-icon" aria-hidden="true" />
                 </div>
                 <h1 className="reset-card-title">Create New Password</h1>
                 <p className="reset-card-sub">
-                  Choose a strong, secure password for your Swiss Beauty Parlour account.
+                  Set a new, secure password for your Swiss Beauty Parlour account.
                 </p>
               </div>
 
               {/* Error Alert */}
               {errorMessage && (
                 <div className="auth-error-alert" role="alert">
-                  <AlertCircle size={16} className="error-icon" />
+                  <AlertCircle size={16} className="error-icon" aria-hidden="true" />
                   <span>{errorMessage}</span>
                 </div>
               )}
@@ -377,6 +405,22 @@ export const ResetPassword: React.FC = () => {
                       {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                     </button>
                   </div>
+
+                  {/* Password Strength Indicator */}
+                  {password.length > 0 && (
+                    <div className="password-strength-container" aria-live="polite">
+                      <div className="strength-header">
+                        <span className="strength-caption">Password Strength:</span>
+                        <span className={`strength-label ${strength.color}`}>{strength.label}</span>
+                      </div>
+                      <div className="strength-track">
+                        <div
+                          className={`strength-bar ${strength.color}`}
+                          style={{ width: `${strength.percent}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Confirm New Password */}
@@ -419,41 +463,41 @@ export const ResetPassword: React.FC = () => {
                   <ul className="criteria-list">
                     <li className={`criteria-item ${criteria.minLength ? 'valid' : ''}`}>
                       {criteria.minLength ? (
-                        <Check size={14} className="crit-icon check" />
+                        <Check size={14} className="crit-icon check" aria-hidden="true" />
                       ) : (
-                        <span className="crit-dot" />
+                        <span className="crit-dot" aria-hidden="true" />
                       )}
                       <span>At least 8 characters long</span>
                     </li>
                     <li className={`criteria-item ${criteria.hasUpper && criteria.hasLower ? 'valid' : ''}`}>
                       {criteria.hasUpper && criteria.hasLower ? (
-                        <Check size={14} className="crit-icon check" />
+                        <Check size={14} className="crit-icon check" aria-hidden="true" />
                       ) : (
-                        <span className="crit-dot" />
+                        <span className="crit-dot" aria-hidden="true" />
                       )}
                       <span>Uppercase &amp; lowercase letters</span>
                     </li>
                     <li className={`criteria-item ${criteria.hasNumber ? 'valid' : ''}`}>
                       {criteria.hasNumber ? (
-                        <Check size={14} className="crit-icon check" />
+                        <Check size={14} className="crit-icon check" aria-hidden="true" />
                       ) : (
-                        <span className="crit-dot" />
+                        <span className="crit-dot" aria-hidden="true" />
                       )}
                       <span>At least one number (0–9)</span>
                     </li>
                     <li className={`criteria-item ${criteria.hasSpecial ? 'valid' : ''}`}>
                       {criteria.hasSpecial ? (
-                        <Check size={14} className="crit-icon check" />
+                        <Check size={14} className="crit-icon check" aria-hidden="true" />
                       ) : (
-                        <span className="crit-dot" />
+                        <span className="crit-dot" aria-hidden="true" />
                       )}
                       <span>At least one special character (!@#$%^&amp;*)</span>
                     </li>
                     <li className={`criteria-item ${criteria.passwordsMatch ? 'valid' : ''}`}>
                       {criteria.passwordsMatch ? (
-                        <Check size={14} className="crit-icon check" />
+                        <Check size={14} className="crit-icon check" aria-hidden="true" />
                       ) : (
-                        <span className="crit-dot" />
+                        <span className="crit-dot" aria-hidden="true" />
                       )}
                       <span>Passwords match</span>
                     </li>
@@ -468,12 +512,12 @@ export const ResetPassword: React.FC = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <RefreshCw size={16} className="btn-spinner" />
+                      <RefreshCw size={16} className="btn-spinner" aria-hidden="true" />
                       <span>Updating Password...</span>
                     </>
                   ) : (
                     <>
-                      <Lock size={16} />
+                      <Lock size={16} aria-hidden="true" />
                       <span>Update Password</span>
                     </>
                   )}
@@ -486,7 +530,7 @@ export const ResetPassword: React.FC = () => {
           {tokenStatus === 'success' && (
             <div className="reset-state-center">
               <div className="reset-success-icon-wrap">
-                <CheckCircle2 size={42} className="reset-success-icon" />
+                <CheckCircle2 size={42} className="reset-success-icon" aria-hidden="true" />
               </div>
               <h1 className="reset-card-title">Password Reset Complete!</h1>
               <p className="reset-card-sub">
@@ -506,8 +550,8 @@ export const ResetPassword: React.FC = () => {
                 className="btn btn-primary auth-submit-btn reset-success-btn"
                 id="reset-success-signin-btn"
               >
-                <span>Sign In Now</span>
-                <ArrowRight size={16} />
+                <span>Back to Login</span>
+                <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
           )}
@@ -516,7 +560,7 @@ export const ResetPassword: React.FC = () => {
           {tokenStatus !== 'success' && (
             <div className="auth-card-footer">
               <Link to="/login" className="back-login-link">
-                <span>Return to Sign In</span>
+                <span>Back to Login</span>
               </Link>
             </div>
           )}
