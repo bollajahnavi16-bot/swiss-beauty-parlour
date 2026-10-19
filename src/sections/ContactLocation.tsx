@@ -67,7 +67,7 @@ export const ContactLocation: React.FC = () => {
                       rel="noopener noreferrer" 
                       className="contact-link"
                     >
-                      Chat on WhatsApp (+91 63033 38549)
+                      Chat on WhatsApp ({BUSINESS_CONFIG.contact.phoneDisplay})
                     </a>
                   </p>
                   <p className="detail-subtext">Quick service enquiries and questions</p>

@@ -75,9 +75,9 @@ export const BUSINESS_CONFIG: BusinessConfig = {
     full: "74-8-16A, Vijayawada Road, JD Nagar, Patamata, Vijayawada, Andhra Pradesh 520010, India"
   },
   contact: {
-    phoneDisplay: "+91 63033 38549",
-    phoneRaw: "+916303338549",
-    whatsappRaw: "916303338549" // International format digits-only
+    phoneDisplay: "+91 98660 55165",
+    phoneRaw: "+919866055165",
+    whatsappRaw: "919866055165" // International format digits-only
   },
   geo: {
     googlePlusCode: "FMR9+M3, Vijayawada, Andhra Pradesh",

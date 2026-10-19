@@ -11,8 +11,8 @@ An editorial, luxury, and fully responsive client website created for **Swiss Be
 | **Business Name** | Swiss Beauty Parlour |
 | **Category** | Beauty Parlour & Women's Grooming |
 | **Address** | 74-8-16A, Vijayawada Road, JD Nagar, Patamata, Vijayawada, Andhra Pradesh 520010, India |
-| **Phone** | +91 63033 38549 |
-| **WhatsApp Direct** | 916303338549 |
+| **Phone** | +91 98660 55165 |
+| **WhatsApp Direct** | 919866055165 |
 | **Google Maps Plus Code** | `FMR9+M3`, Vijayawada, Andhra Pradesh |
 | **Reported Rating** | 4.0 / 5.0 (4 reviews) — *Configurable, flagged for owner confirmation* |
 
