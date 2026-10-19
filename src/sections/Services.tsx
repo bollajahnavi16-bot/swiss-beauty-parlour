@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, CheckCircle, ArrowRight } from 'lucide-react';
+import { Clock, CheckCircle, ArrowRight, MessageSquare } from 'lucide-react';
 import { SERVICES_CATALOGUE, SERVICE_CATEGORIES, type ServiceItem, BUSINESS_CONFIG } from '../data/businessConfig';
 import './Services.css';
 
@@ -88,9 +88,21 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                     onClick={() => onSelectService(service.name)}
                     aria-label={`Book ${service.name}`}
                   >
-                    <span>Book This Service</span>
+                    <span>Book Service</span>
                     <ArrowRight size={14} className="service-cta-arrow" />
                   </button>
+
+                  <a
+                    href={`https://wa.me/${BUSINESS_CONFIG.contact.whatsappRaw}?text=${encodeURIComponent(`Hello Swiss Beauty Parlour! I would like to enquire about ${service.name}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="service-wa-quick"
+                    title={`Enquire on WhatsApp about ${service.name}`}
+                    aria-label={`Enquire on WhatsApp about ${service.name}`}
+                  >
+                    <MessageSquare size={16} />
+                    <span className="wa-quick-tooltip">WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </article>

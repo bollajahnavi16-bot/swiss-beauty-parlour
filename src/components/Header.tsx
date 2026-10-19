@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MapPin, Sparkles, User as UserIcon } from 'lucide-react';
+import { Phone, MapPin, Sparkles, User as UserIcon, MessageSquare } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { BUSINESS_CONFIG } from '../data/businessConfig';
 import './Header.css';
@@ -76,6 +76,18 @@ export const Header: React.FC<HeaderProps> = ({ onBookClick }) => {
 
           {/* Header Action Button */}
           <div className="header-actions desktop-only">
+            <a
+              href={`https://wa.me/${BUSINESS_CONFIG.contact.whatsappRaw}?text=${encodeURIComponent("Hello Swiss Beauty Parlour! I would like to book an appointment.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-whatsapp-header"
+              title="Chat on WhatsApp"
+              aria-label="Chat on WhatsApp"
+            >
+              <MessageSquare size={14} />
+              <span>WhatsApp</span>
+            </a>
+
             <button 
               type="button"
               className="btn btn-primary btn-sm" 
@@ -139,6 +151,18 @@ export const Header: React.FC<HeaderProps> = ({ onBookClick }) => {
                 Book Appointment
               </button>
               
+              <a 
+                href={`https://wa.me/${BUSINESS_CONFIG.contact.whatsappRaw}?text=${encodeURIComponent("Hello Swiss Beauty Parlour! I would like to book an appointment.")}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-whatsapp-mobile" 
+                style={{ width: '100%', marginTop: '0.75rem' }}
+                onClick={closeMenu}
+              >
+                <MessageSquare size={15} />
+                WhatsApp Booking
+              </a>
+
               <a 
                 href={`tel:${BUSINESS_CONFIG.contact.phoneRaw}`} 
                 className="btn btn-secondary" 

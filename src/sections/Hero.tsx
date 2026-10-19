@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, MessageSquare } from 'lucide-react';
+import { BUSINESS_CONFIG } from '../data/businessConfig';
 import './Hero.css';
 
 interface HeroProps {
@@ -46,6 +47,18 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreClick }) => {
                   <span>BOOK AN APPOINTMENT</span>
                   <ArrowRight size={15} />
                 </button>
+
+                <a
+                  href={`https://wa.me/${BUSINESS_CONFIG.contact.whatsappRaw}?text=${encodeURIComponent("Hello Swiss Beauty Parlour! I would like to book an appointment.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-hero-whatsapp"
+                  id="hero-whatsapp-btn"
+                  aria-label="Book directly via WhatsApp"
+                >
+                  <MessageSquare size={16} aria-hidden="true" />
+                  <span>WhatsApp Booking</span>
+                </a>
 
                 <button
                   type="button"
