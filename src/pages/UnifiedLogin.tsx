@@ -71,7 +71,14 @@ export const UnifiedLogin: React.FC = () => {
     setSubmitting(false);
 
     if (error) {
-      setAuthError(error.message);
+      const errMsg = error.message.toLowerCase();
+      if (errMsg.includes('invalid login credentials')) {
+        setAuthError('Invalid email or password. Please verify your credentials or click "Forgot Password?" below.');
+      } else if (errMsg.includes('email not confirmed')) {
+        setAuthError('Your email has not been confirmed yet. Please check your inbox or turn off "Confirm email" in your Supabase Dashboard to allow immediate sign-in.');
+      } else {
+        setAuthError(error.message);
+      }
       return;
     }
 
@@ -121,7 +128,16 @@ export const UnifiedLogin: React.FC = () => {
     setSubmitting(false);
 
     if (error) {
-      setAuthError(error.message);
+      const errMsg = error.message.toLowerCase();
+      if (errMsg.includes('rate limit') || errMsg.includes('over_email_send_rate_limit')) {
+        setAuthError(
+          'Email provider rate limit reached: Your email address is valid! However, Supabase\'s default test mailer is temporarily rate-limited (max 3-4 emails/hour). If this account was already registered, please click "Switch to Sign In" below. To allow instant registration without email limits, disable "Confirm email" in your Supabase Dashboard.'
+        );
+      } else if (errMsg.includes('already registered') || errMsg.includes('user already exists')) {
+        setAuthError('An account with this email address already exists. Please switch to the Sign In tab.');
+      } else {
+        setAuthError(error.message);
+      }
       return;
     }
 
@@ -211,8 +227,23 @@ export const UnifiedLogin: React.FC = () => {
           {/* Error & Success Alerts */}
           {authError && (
             <div className="auth-error-alert" role="alert">
-              <AlertCircle size={16} className="error-icon" />
-              <span>{authError}</span>
+              <AlertCircle size={18} className="error-icon" />
+              <div className="auth-error-body">
+                <span>{authError}</span>
+                {mode === 'register' && (authError.includes('Sign In') || authError.includes('already exists')) && (
+                  <button
+                    type="button"
+                    className="auth-error-action-link"
+                    onClick={() => {
+                      setEmail(regEmail || email);
+                      setMode('signin');
+                      setAuthError(null);
+                    }}
+                  >
+                    Go to Sign In &rarr;
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
