@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreClick }) => {
               <div className="brand-footer-separator"></div>
               <div className="brand-footer-item">
                 <span className="meta-caption">REPUTATION</span>
-                <span className="meta-text">4.0 Verified Local Rating</span>
+                <span className="meta-text">4.0 Rating (4 Local Reviews)</span>
               </div>
             </div>
           </div>

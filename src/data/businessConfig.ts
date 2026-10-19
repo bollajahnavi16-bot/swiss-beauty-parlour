@@ -7,8 +7,11 @@ export interface ServiceItem {
   name: string;
   category: string;
   description: string;
-  priceNote?: string;
-  durationNote?: string;
+  priceNote: string;
+  startingPrice?: number;
+  priceRange?: string;
+  customPackage?: boolean;
+  durationNote: string;
   badge?: string;
   image: string;
 }
@@ -40,6 +43,13 @@ export interface BusinessConfig {
     phoneDisplay: string;
     phoneRaw: string;
     whatsappRaw: string;
+  };
+  hours: {
+    schedule: string;
+    closedDays: string[];
+    tentativeSlotHours: string;
+    notice: string;
+    needsOwnerConfirmation: boolean;
   };
   geo: {
     googlePlusCode: string;
@@ -79,6 +89,13 @@ export const BUSINESS_CONFIG: BusinessConfig = {
     phoneRaw: "+919866055165",
     whatsappRaw: "919866055165" // International format digits-only
   },
+  hours: {
+    schedule: "Tuesday to Sunday",
+    closedDays: ["Monday"],
+    tentativeSlotHours: "10:00 AM – 8:00 PM",
+    notice: "Operating hours are tentative and subject to confirmation upon appointment request.",
+    needsOwnerConfirmation: true
+  },
   geo: {
     googlePlusCode: "FMR9+M3, Vijayawada, Andhra Pradesh",
     googleMapsDirectionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Swiss+Beauty+Parlour+Patamata+Vijayawada+520010",
@@ -88,80 +105,82 @@ export const BUSINESS_CONFIG: BusinessConfig = {
   ratingStatus: {
     reportedRating: 4.0,
     reportedReviewsCount: 4,
-    source: "User-supplied public listing profile",
+    source: "Reported public local listing profile",
     needsOwnerConfirmation: true
   },
   disclaimer: {
-    pricingNotice: "Individual service charges and customized packages are confirmed in-salon based on hair/skin consultation.",
+    pricingNotice: "Treatment charges and customized bridal packages are finalized in-salon based on hair, skin, and styling consultation.",
     photoNotice: "Curated styling demonstrations are shown below for visual inspiration. Verified salon work will be uploaded upon owner confirmation.",
-    bookingNotice: "Online submissions send an instant WhatsApp appointment enquiry directly to the parlour. Appointments are finalized once confirmed by the parlour."
+    bookingNotice: "Online submissions send an appointment request directly to Swiss Beauty Parlour on WhatsApp. Appointment slots are confirmed upon parlour review."
   }
 };
 
 export const SERVICE_CATEGORIES = [
   "All Services",
-  "Hair Care & Styling",
-  "Facials & Skincare",
-  "Bridal & Party Artistry",
-  "Beauty & Grooming",
-  "Saree Draping"
+  "Hair Styling",
+  "Facials",
+  "Bridal Makeup",
+  "Party Makeup",
+  "Saree Draping",
+  "Grooming"
 ] as const;
 
 export const SERVICES_CATALOGUE: ServiceItem[] = [
   {
-    id: "hair-styling-care",
-    name: "Hair Styling & Intensive Hair Care",
-    category: "Hair Care & Styling",
-    description: "Custom haircuts, nourishing spa therapies, deep-conditioning hydration, and elegant blowouts tailored to your hair texture.",
-    priceNote: "Consultation-based",
+    id: "hair-styling",
+    name: "Hair Styling",
+    category: "Hair Styling",
+    description: "Custom haircuts, blowouts, nourishing hair spa therapies, and deep conditioning hydration tailored to your hair texture.",
+    priceNote: "Contact for pricing",
     durationNote: "45–90 min",
-    badge: "Signature",
+    badge: "Popular",
     image: "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: "facials-skincare",
-    name: "Radiance Facials & Skin Revitalization",
-    category: "Facials & Skincare",
-    description: "Deep cleansing, skin polishing, botanical masks, and revitalizing face rituals for a natural, luminous glow.",
-    priceNote: "Consultation-based",
+    id: "facials",
+    name: "Facials",
+    category: "Facials",
+    description: "Deep cleansing, skin polishing, botanical rejuvenation masks, and revitalizing treatments for a natural, luminous glow.",
+    priceNote: "Contact for pricing",
     durationNote: "60–75 min",
-    badge: "Popular",
+    badge: "Signature",
     image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: "bridal-makeup",
-    name: "Bridal Makeup & Complete Makeover",
-    category: "Bridal & Party Artistry",
-    description: "Bespoke bridal looks with long-lasting HD finishes, traditional jewellery matching, eye artistry, and complete wedding styling.",
-    priceNote: "Custom Package",
+    name: "Bridal Makeup",
+    category: "Bridal Makeup",
+    description: "Bespoke bridal looks with long-lasting HD finishes, jewellery setting, hair artistry, and complete wedding-day styling.",
+    priceNote: "Custom package",
+    customPackage: true,
     durationNote: "120–180 min",
     badge: "Bespoke",
     image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: "party-makeup",
-    name: "Party & Occasion Glamour",
-    category: "Bridal & Party Artistry",
-    description: "Modern, radiant makeup tailored for receptions, festivities, and special occasions with flawless skin finishes.",
-    priceNote: "Consultation-based",
+    name: "Party Makeup",
+    category: "Party Makeup",
+    description: "Radiant, camera-ready makeup tailored for receptions, festivities, and special occasions with flawless skin finishes.",
+    priceNote: "Contact for pricing",
     durationNote: "60–90 min",
     image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: "saree-draping",
-    name: "Traditional & Contemporary Saree Draping",
+    name: "Saree Draping",
     category: "Saree Draping",
-    description: "Precision pleating, box pleating, South Indian bridal silks, and contemporary drape silhouettes that stay pristine.",
-    priceNote: "Per Drape",
+    description: "Traditional South Indian bridal silk pleating, box pleating, and contemporary saree drape silhouettes styled for comfort and longevity.",
+    priceNote: "Contact for pricing",
     durationNote: "30–45 min",
     image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: "beauty-grooming",
-    name: "Essential Beauty & Grooming",
-    category: "Beauty & Grooming",
+    id: "grooming",
+    name: "Grooming",
+    category: "Grooming",
     description: "Precision eyebrow threading, gentle waxing, manicures, pedicures, and herbal de-tan skin care in a hygienic space.",
-    priceNote: "Service-specific",
+    priceNote: "Contact for pricing",
     durationNote: "30–60 min",
     badge: "Everyday Care",
     image: "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?q=80&w=1000&auto=format&fit=crop"

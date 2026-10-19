@@ -81,8 +81,8 @@ export const ContactLocation: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="detail-label">Operating Schedule</h4>
-                  <p className="detail-text">Tuesday through Sunday</p>
-                  <p className="detail-subtext">Please call ahead or book via WhatsApp to reserve your slot.</p>
+                  <p className="detail-text">{BUSINESS_CONFIG.hours.schedule} (Closed Mondays)</p>
+                  <p className="detail-subtext">Slot enquiries: {BUSINESS_CONFIG.hours.tentativeSlotHours} (Subject to salon confirmation)</p>
                 </div>
               </div>
             </div>

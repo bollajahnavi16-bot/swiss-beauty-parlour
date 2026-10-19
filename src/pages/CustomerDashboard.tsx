@@ -52,8 +52,15 @@ export const CustomerDashboard: React.FC = () => {
     setTimeout(() => setFeedbackToast(null), 3500);
   };
 
-  // Minimum date is today
-  const [minDate] = useState(() => new Date().toISOString().split('T')[0]);
+  // Minimum date is today in Asia/Kolkata timezone
+  const [minDate] = useState(() =>
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date())
+  );
 
   const loadAppointments = useCallback(async () => {
     if (!user) return;
@@ -125,6 +132,13 @@ export const CustomerDashboard: React.FC = () => {
 
     if (!bookDate) {
       setBookingError('Please select your preferred date.');
+      return;
+    }
+
+    const [y, m, d] = bookDate.split('-').map(Number);
+    const dayOfWeek = new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay();
+    if (dayOfWeek === 1) {
+      setBookingError('Swiss Beauty Parlour is closed on Mondays. Please choose Tuesday through Sunday.');
       return;
     }
 

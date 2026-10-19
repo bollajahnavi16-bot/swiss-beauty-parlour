@@ -267,21 +267,37 @@ button, input, select, textarea {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 0.95rem 2.2rem;
+  padding: 0.85rem 1.85rem;
+  min-height: 44px;
   border-radius: var(--radius-xs);
   cursor: pointer;
   border: 1px solid transparent;
   transition: all var(--transition-smooth);
   text-align: center;
   position: relative;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-royal-pink);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-royal-pink);
+  outline-offset: 2px;
 }
 
 /* Primary Button: Royal Pink (#8E2455) */
 .btn-primary {
   background-color: var(--color-royal-pink);
-  color: var(--color-pearl-ivory);
+  color: #FFFFFF;
   border-color: var(--color-royal-pink);
   box-shadow: var(--shadow-royal-pink);
 }

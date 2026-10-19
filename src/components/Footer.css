@@ -225,5 +225,6 @@
   .footer-bottom-bar {
     flex-direction: column;
     align-items: flex-start;
+    padding-bottom: 5.5rem; /* Space reserved so fixed floating buttons never obscure footer info */
   }
 }

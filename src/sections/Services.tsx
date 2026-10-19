@@ -68,15 +68,17 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 <div className="service-meta-row">
                   {service.durationNote && (
                     <span className="service-meta-item">
-                      <Clock size={13} className="meta-icon" />
+                      <Clock size={14} className="meta-icon" />
                       {service.durationNote}
                     </span>
                   )}
-                  {service.priceNote && (
-                    <span className="service-meta-item price-badge">
-                      {service.priceNote}
-                    </span>
-                  )}
+                  <span className="service-meta-item price-badge">
+                    {service.startingPrice
+                      ? `Starting from ₹${service.startingPrice.toLocaleString('en-IN')}`
+                      : service.priceRange
+                      ? service.priceRange
+                      : service.priceNote || 'Contact for pricing'}
+                  </span>
                 </div>
 
                 <div className="service-card-action">
