@@ -1,4 +1,5 @@
-import { Phone, MapPin, ArrowUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, MapPin, ArrowUp, ShieldCheck, X } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../data/businessConfig';
 import './Footer.css';
 
@@ -10,10 +11,21 @@ const CURRENT_YEAR = 2026;
 
 export const Footer: React.FC<FooterProps> = ({ onBookClick }) => {
   const currentYear = CURRENT_YEAR;
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Close modal on Escape
+  useEffect(() => {
+    if (!showPrivacy) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowPrivacy(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showPrivacy]);
 
   return (
     <footer className="site-footer">
@@ -88,7 +100,16 @@ export const Footer: React.FC<FooterProps> = ({ onBookClick }) => {
           </p>
 
           <div className="footer-bottom-middle">
-            <span>Crafted for Elegance & Genuine Client Care</span>
+            <span>Client Care & Quality Services</span>
+            <span style={{ margin: '0 0.5rem', opacity: 0.5 }}>•</span>
+            <button
+              type="button"
+              className="footer-privacy-btn"
+              onClick={() => setShowPrivacy(true)}
+              aria-haspopup="dialog"
+            >
+              Privacy Notice
+            </button>
             <span style={{ margin: '0 0.5rem', opacity: 0.5 }}>•</span>
             <a href="/login" className="footer-owner-link" title="Unified Client & Management Portal">
               Portal Sign In
@@ -106,6 +127,88 @@ export const Footer: React.FC<FooterProps> = ({ onBookClick }) => {
           </button>
         </div>
       </div>
+
+      {/* Privacy Notice Modal */}
+      {showPrivacy && (
+        <div 
+          className="privacy-modal-backdrop" 
+          role="dialog" 
+          aria-modal="true" 
+          aria-labelledby="privacy-modal-title"
+          onClick={() => setShowPrivacy(false)}
+        >
+          <div 
+            className="privacy-modal-content" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="privacy-modal-header">
+              <div className="privacy-title-wrap">
+                <ShieldCheck size={20} className="privacy-modal-icon" aria-hidden="true" />
+                <h3 id="privacy-modal-title" className="privacy-modal-title">Client Privacy Notice</h3>
+              </div>
+              <button 
+                type="button" 
+                className="privacy-close-btn" 
+                onClick={() => setShowPrivacy(false)}
+                aria-label="Close Privacy Notice"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="privacy-modal-body">
+              <p className="privacy-intro">
+                At <strong>{BUSINESS_CONFIG.name}</strong>, we respect your personal privacy and are committed to protecting the information you share with us.
+              </p>
+
+              <div className="privacy-section">
+                <h4>1. Information We Collect</h4>
+                <p>
+                  When you request an appointment, we collect basic details including your name, contact phone number, preferred service, date, time, and optional styling notes.
+                </p>
+              </div>
+
+              <div className="privacy-section">
+                <h4>2. Purpose of Use</h4>
+                <p>
+                  Your details are used strictly to coordinate your beauty service appointments, confirm slot availability, and communicate relevant parlour scheduling updates.
+                </p>
+              </div>
+
+              <div className="privacy-section">
+                <h4>3. Direct WhatsApp & Salon Communication</h4>
+                <p>
+                  Appointment requests submitted via our website connect directly with our salon team on WhatsApp (+91 98660 55165). We do not send marketing spam or promotional broadcasts without consent.
+                </p>
+              </div>
+
+              <div className="privacy-section">
+                <h4>4. Zero Third-Party Sharing</h4>
+                <p>
+                  We do not sell, rent, trade, or share your personal contact details with third-party advertisers or external data brokers under any circumstances.
+                </p>
+              </div>
+
+              <div className="privacy-section">
+                <h4>5. Contact & Questions</h4>
+                <p>
+                  If you have questions about your information or wish to modify or delete your booking history, please reach out to us at <strong>{BUSINESS_CONFIG.contact.phoneDisplay}</strong> or visit our salon at <strong>{BUSINESS_CONFIG.address.full}</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div className="privacy-modal-footer">
+              <button 
+                type="button" 
+                className="btn btn-primary privacy-done-btn"
+                onClick={() => setShowPrivacy(false)}
+              >
+                I Understand
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };

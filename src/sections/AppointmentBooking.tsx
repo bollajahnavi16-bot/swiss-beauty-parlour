@@ -9,7 +9,8 @@ import {
   MessageSquare,
   RefreshCw,
   Copy,
-  Check
+  Check,
+  ShieldCheck
 } from 'lucide-react';
 import { BUSINESS_CONFIG, SERVICES_CATALOGUE } from '../data/businessConfig';
 import { submitAppointment, isSupabaseConfigured } from '../lib/supabase';
@@ -639,6 +640,13 @@ export const AppointmentBooking: React.FC<AppointmentBookingProps> = ({ preselec
                 <p className="form-disclaimer-note">
                   Submitting this request connects you with Swiss Beauty Parlour on WhatsApp. Appointment slots are finalized upon parlour team review.
                 </p>
+
+                <div className="form-privacy-note">
+                  <ShieldCheck size={15} className="form-privacy-icon" aria-hidden="true" />
+                  <span>
+                    <strong>Client Privacy Guarantee:</strong> Your contact number is used solely for appointment confirmation and coordination by Swiss Beauty Parlour. We never share your data.
+                  </span>
+                </div>
               </form>
             )}
           </div>

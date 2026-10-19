@@ -498,3 +498,24 @@
     font-size: 1.7rem;
   }
 }
+
+.form-privacy-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.75rem 0.95rem;
+  background-color: rgba(142, 36, 85, 0.05);
+  border: 1px solid rgba(142, 36, 85, 0.12);
+  border-radius: var(--radius-sm);
+  font-size: 0.775rem;
+  line-height: 1.5;
+  color: #5a4b54;
+  margin-top: 0.75rem;
+}
+
+.form-privacy-icon {
+  color: var(--color-royal-pink);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
