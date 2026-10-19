@@ -4,6 +4,8 @@ import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { PublicWebsite } from './pages/PublicWebsite';
 import { UnifiedLogin } from './pages/UnifiedLogin';
+import { ForgotPassword } from './pages/ForgotPassword';
+import { ResetPassword } from './pages/ResetPassword';
 
 // Code-split dashboards for optimal landing page performance
 const AdminDashboard = lazy(() =>
@@ -42,6 +44,10 @@ export function App() {
           {/* Unified Login & Customer Registration Route */}
           <Route path="/login" element={<UnifiedLogin />} />
           <Route path="/auth" element={<Navigate to="/login" replace />} />
+
+          {/* Secure Password Recovery & Reset Routes */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Role-Protected Customer Portal Route */}
           <Route

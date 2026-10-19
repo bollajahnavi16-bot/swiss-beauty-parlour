@@ -452,3 +452,81 @@ export async function upsertCustomerProfile(
     return { success: false, error: err instanceof Error ? err : new Error('Failed to save profile') };
   }
 }
+
+/**
+ * Send password reset email via Supabase Auth.
+ * Detects rate limit errors and enforces secure handling.
+ */
+export async function sendPasswordResetEmail(
+  email: string,
+  redirectTo?: string
+): Promise<{ success: boolean; error: Error | null; isRateLimited?: boolean }> {
+  if (!isSupabaseConfigured()) {
+    return {
+      success: false,
+      error: new Error(getSupabaseConfigValidation().error || 'Authentication provider not configured.'),
+    };
+  }
+
+  const targetRedirect = redirectTo || (
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/reset-password`
+      : 'https://swiss-beauty-parlour.vercel.app/reset-password'
+  );
+
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: targetRedirect,
+    });
+
+    if (error) {
+      const isRateLimit =
+        error.status === 429 ||
+        error.message.toLowerCase().includes('rate limit') ||
+        (error as any).code === 'over_email_send_rate_limit';
+      return {
+        success: false,
+        error: new Error(error.message),
+        isRateLimited: isRateLimit,
+      };
+    }
+
+    return { success: true, error: null };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err : new Error('Failed to send password reset email.'),
+    };
+  }
+}
+
+/**
+ * Update authenticated user's password during recovery flow.
+ */
+export async function updateUserPassword(
+  newPassword: string
+): Promise<{ success: boolean; error: Error | null }> {
+  if (!isSupabaseConfigured()) {
+    return {
+      success: false,
+      error: new Error('Authentication provider not configured.'),
+    };
+  }
+
+  try {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      return { success: false, error: new Error(error.message) };
+    }
+
+    return { success: true, error: null };
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err : new Error('Failed to update password.'),
+    };
+  }
+}

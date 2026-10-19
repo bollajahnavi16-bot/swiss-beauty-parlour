@@ -185,6 +185,76 @@
   flex-direction: column;
 }
 
+/* Password Input with Visibility Toggle */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper .password-input {
+  width: 100%;
+  padding-right: 2.75rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-main-text-muted);
+  cursor: pointer;
+  padding: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-royal-pink);
+  background-color: var(--color-blush-pink-light);
+}
+
+.password-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-luxury-rose);
+  outline-offset: 1px;
+}
+
+/* Forgot Password Row (Clearly visible below password field) */
+.forgot-password-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.45rem;
+  margin-bottom: 0.25rem;
+}
+
+.forgot-password-link {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-royal-pink);
+  text-decoration: none;
+  transition: color var(--transition-fast), text-decoration var(--transition-fast);
+  padding: 0.15rem 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.forgot-password-link:hover {
+  color: var(--color-luxury-rose);
+  text-decoration: underline;
+}
+
+.forgot-password-link:focus-visible {
+  outline: 2px solid var(--color-royal-pink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 .auth-submit-btn {
   width: 100%;
   padding: 0.95rem;

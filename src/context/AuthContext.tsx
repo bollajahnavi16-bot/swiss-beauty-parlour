@@ -7,6 +7,8 @@ import {
   getUserRole,
   getCustomerProfile,
   upsertCustomerProfile,
+  sendPasswordResetEmail,
+  updateUserPassword,
   type UserRole,
   type CustomerProfile
 } from '../lib/supabase';
@@ -26,6 +28,8 @@ interface AuthContextType {
   ) => Promise<{ error: Error | null; role: UserRole }>;
   signOut: () => Promise<void>;
   refreshAuth: () => Promise<void>;
+  sendPasswordReset: (email: string, redirectTo?: string) => Promise<{ success: boolean; error: Error | null; isRateLimited?: boolean }>;
+  updatePassword: (password: string) => Promise<{ success: boolean; error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -226,6 +230,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await syncUserState(curSession?.user || null);
   };
 
+  const sendPasswordReset = async (email: string, redirectTo?: string) => {
+    return await sendPasswordResetEmail(email, redirectTo);
+  };
+
+  const updatePassword = async (password: string) => {
+    return await updateUserPassword(password);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -238,6 +250,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         signUp,
         signOut,
         refreshAuth,
+        sendPasswordReset,
+        updatePassword,
       }}
     >
       {children}

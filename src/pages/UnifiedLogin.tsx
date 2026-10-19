@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Lock, UserCheck, AlertCircle, RefreshCw, ArrowLeft, Sparkles, Heart } from 'lucide-react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Lock, UserCheck, AlertCircle, RefreshCw, ArrowLeft, Sparkles, Heart, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { isSupabaseConfigured, getSupabaseConfigValidation } from '../lib/supabase';
 import './UnifiedLogin.css';
@@ -16,17 +16,28 @@ export const UnifiedLogin: React.FC = () => {
   // Sign In Form State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Register Form State (Customer Sign Up)
   const [regFullName, setRegFullName] = useState('');
   const [regPhone, setRegPhone] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
+  const [showRegPassword, setShowRegPassword] = useState(false);
 
   // Processing & Error State
   const [submitting, setSubmitting] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [successNotice, setSuccessNotice] = useState<string | null>(null);
+
+  // Check for reset password success notification or notice passed in location state
+  useEffect(() => {
+    if (location.state?.resetSuccess) {
+      setSuccessNotice(location.state.resetSuccess);
+      // Clean up history state so reloading doesn't re-trigger it
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   // If user is already authenticated, redirect them automatically based on their role
   useEffect(() => {
@@ -236,17 +247,38 @@ export const UnifiedLogin: React.FC = () => {
                 <label htmlFor="loginPassword" className="form-label">
                   Password <span className="req">*</span>
                 </label>
-                <input
-                  type="password"
-                  id="loginPassword"
-                  name="password"
-                  autoComplete="current-password"
-                  required
-                  placeholder="••••••••••••"
-                  className="form-input"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
+                <div className="password-input-wrapper">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="loginPassword"
+                    name="password"
+                    autoComplete="current-password"
+                    required
+                    placeholder="••••••••••••"
+                    className="form-input password-input"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="password-toggle-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    title={showPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                  </button>
+                </div>
+                <div className="forgot-password-row">
+                  <Link
+                    to="/forgot-password"
+                    className="forgot-password-link"
+                    id="forgot-password-link"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
               </div>
 
               <button
@@ -330,17 +362,29 @@ export const UnifiedLogin: React.FC = () => {
                 <label htmlFor="regPassword" className="form-label">
                   Create Password (minimum 6 characters) <span className="req">*</span>
                 </label>
-                <input
-                  type="password"
-                  id="regPassword"
-                  name="password"
-                  autoComplete="new-password"
-                  required
-                  placeholder="••••••••••••"
-                  className="form-input"
-                  value={regPassword}
-                  onChange={e => setRegPassword(e.target.value)}
-                />
+                <div className="password-input-wrapper">
+                  <input
+                    type={showRegPassword ? 'text' : 'password'}
+                    id="regPassword"
+                    name="password"
+                    autoComplete="new-password"
+                    required
+                    placeholder="••••••••••••"
+                    className="form-input password-input"
+                    value={regPassword}
+                    onChange={e => setRegPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="password-toggle-btn"
+                    onClick={() => setShowRegPassword(!showRegPassword)}
+                    aria-label={showRegPassword ? 'Hide password' : 'Show password'}
+                    title={showRegPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={-1}
+                  >
+                    {showRegPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                  </button>
+                </div>
               </div>
 
               <button
